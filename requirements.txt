@@ -3,3 +3,4 @@ opencv-python-headless
 mediapipe
 numpy
 flask-cors
+werkzeug==2.0.3
