@@ -186,8 +186,10 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                       ),
                       SizedBox(height: 16),
                       GestureDetector(
-                        onTap: () async {
-                          _isRunning ? _stopExercise : null;
+                        onTap: () {
+                          if (_isRunning) {
+                            _stopExercise();
+                          }
                         },
                         child: Container(
                           width: double.infinity,
@@ -221,7 +223,14 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
             );
           } else {
             return Center(
-                child: CircularProgressIndicator(color: HelPT.mainBlue,));
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CircularProgressIndicator(color: HelPT.mainBlue,),
+                    SizedBox(height: 10,),
+                    Text("카메라 초기화 중...", style: TextStyle(color: HelPT.lightgrey3))
+                  ],
+                ));
           }
         },
       ),

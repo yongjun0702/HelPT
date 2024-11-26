@@ -6,7 +6,6 @@ import 'package:http/http.dart' as http;
 class ApiService {
   final String baseUrl = 'https://two4oss-group6.onrender.com'; // Flask 서버 URL
 
-  // 푸쉬업 카운트를 계산하기 위해 서버에 이미지 전송
   Future<int> sendFrame(XFile image) async {
     try {
       // 이미지 파일을 읽고 Base64로 인코딩
@@ -33,8 +32,6 @@ class ApiService {
       rethrow;
     }
   }
-
-  // 푸쉬업 카운터 초기화 요청
   Future<void> resetCounter() async {
     final url = Uri.parse('$baseUrl/reset');
     final response = await http.post(url);
