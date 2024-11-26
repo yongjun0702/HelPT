@@ -72,57 +72,14 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 70),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                border: Border.all(width: 1.5, color: HelPT.mainBlue),
-                color: HelPT.tapBackgroud,
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Icon(Icons.directions_run, color: HelPT.mainBlue, size: 90),
-                    Flexible(
-                      child: Text.rich(TextSpan(children: [
-                        TextSpan(
-                          text: '$displayName님',
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              color: HelPT.lightgrey3),
-                        ),
-                        TextSpan(
-                            text: '\n측정을 시작해볼까요?',
-                            style: TextStyle(
-                                fontSize: ratio.width * 25,
-                                color: HelPT.mainBlue,
-                                fontWeight: FontWeight.bold)),
-                      ])),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            GestureDetector(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ExerciseScreen(),
-                    ));
-              },
-              child: Container(
-                width: double.infinity,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 70),
+              Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(width: 1.5, color: HelPT.mainBlue),
@@ -132,25 +89,73 @@ class _HomeScreenState extends State<HomeScreen> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        "측정 하기",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: HelPT.mainBlue,
-                        ),
+                      Icon(Icons.directions_run, color: HelPT.mainBlue, size: 90),
+                      Flexible(
+                        child: Text.rich(TextSpan(children: [
+                          TextSpan(
+                            text: '$displayName님',
+                            style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.bold,
+                                color: HelPT.lightgrey3),
+                          ),
+                          TextSpan(
+                              text: '\n측정을 시작해볼까요?',
+                              style: TextStyle(
+                                  fontSize: ratio.width * 25,
+                                  color: HelPT.mainBlue,
+                                  fontWeight: FontWeight.bold)),
+                        ])),
                       ),
-                      Spacer(),
-                      Icon(Icons.arrow_forward, color: HelPT.mainBlue),
                     ],
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 80),
-            Expanded(child: ExerciseResultWidget()),
-          ],
+              SizedBox(height: 20),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ExerciseScreen(),
+                      ));
+                },
+                child: Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(width: 1.5, color: HelPT.mainBlue),
+                    color: HelPT.tapBackgroud,
+                  ),
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    child: Row(
+                      children: [
+                        Text(
+                          "측정 하기",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: HelPT.mainBlue,
+                          ),
+                        ),
+                        Spacer(),
+                        Icon(Icons.arrow_forward, color: HelPT.mainBlue),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 80),
+              SizedBox(
+                height: 800,
+                child: ExerciseResultWidget(),
+              ),
+            ],
+          ),
         ),
       ),
     );

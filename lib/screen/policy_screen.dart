@@ -73,7 +73,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
             Text(
               '서비스 이용에는\n구글 계정이 필요해요.',
               style: TextStyle(
-                fontSize: ratio.height * 33,
+                fontSize: 33,
                 fontWeight: FontWeight.bold,
                 color: HelPT.lightgrey3
               ),
@@ -89,7 +89,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
                       Text(
                         "모두 동의",
                         style: TextStyle(
-                          fontSize: ratio.height * 20,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: HelPT.mainBlue,
                         ),
@@ -113,7 +113,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
                             Text(
                               "서비스 이용약관",
                               style: TextStyle(
-                                fontSize: ratio.height * 20,
+                                fontSize: 20,
                                 color: HelPT.lightgrey3,
                               ),
                             ),
@@ -125,7 +125,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
                       Text(
                         "동의",
                         style: TextStyle(
-                          fontSize: ratio.height * 20,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: HelPT.mainBlue,
                         ),
@@ -154,7 +154,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
                             Text(
                               "개인정보처리방침",
                               style: TextStyle(
-                                fontSize: ratio.height * 20,
+                                fontSize: 20,
                                 color: HelPT.lightgrey3,
                               ),
                             ),
@@ -166,7 +166,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
                       Text(
                         "동의",
                         style: TextStyle(
-                          fontSize: ratio.height * 20,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: HelPT.mainBlue,
                         ),
@@ -190,7 +190,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
                 ],
               ),
             ),
-            SizedBox(height: ratio.height * 20),
+            SizedBox(height: 20),
             GestureDetector(
               onTap: isLoginEnabled
                   ? () async {
@@ -219,7 +219,7 @@ class _PolicyScreenState extends State<PolicyScreen> {
                     child: Text(
                       "구글 계정으로 로그인",
                       style: TextStyle(
-                        fontSize: ratio.height * 20,
+                        fontSize: 20,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),

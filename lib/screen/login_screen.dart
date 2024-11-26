@@ -104,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Text(
                 '나만의',
                 style: TextStyle(
-                  fontSize: ratio.height * 40,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
                     color: HelPT.lightgrey2
                 ),
@@ -117,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Text(
                 '헬스 트레이너',
                 style: TextStyle(
-                  fontSize: ratio.height * 40,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold,
                     color: HelPT.lightgrey2
                 ),
@@ -144,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
             ),
-            SizedBox(height: ratio.height * 70),
+            SizedBox(height: 70),
             AnimatedOpacity(
               opacity: opacityLevel4,
               duration: const Duration(seconds: 1),
@@ -172,9 +172,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               WidgetSpan(
                                   child:
-                                  SizedBox(width: ratio.width * 5)),
+                                  SizedBox(width: 5)),
                               TextSpan(
-                                  text: '목표 설정 후 기록을 측정할 수 있어요.',
+                                  text: '카메라를 이용해 손쉽게 측정하세요.',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -186,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: ratio.height * 5),
+                SizedBox(height: 5),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -210,7 +210,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               WidgetSpan(
                                   child:
-                                  SizedBox(width: ratio.width * 5)),
+                                  SizedBox(width: 5)),
                               TextSpan(
                                   text: '운동이 끝나면 종료 버튼을 눌러주세요.',
                                   style: TextStyle(
@@ -224,7 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: ratio.height * 5),
+                SizedBox(height: 5),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
@@ -248,9 +248,9 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                               WidgetSpan(
                                   child:
-                                  SizedBox(width: ratio.width * 5)),
+                                  SizedBox(width: 5)),
                               TextSpan(
-                                  text: '목표를 달성하면 캘린더에 나타나요.',
+                                  text: '운동 종료 후 기록을 확인하세요.',
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold,
@@ -264,7 +264,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ]),
             ),
-            SizedBox(height: ratio.height * 75),
+            SizedBox(height: 75),
             AnimatedOpacity(
               opacity: opacityLevel4,
               duration: const Duration(seconds: 1),
@@ -290,7 +290,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Text(
                         "시작하기",
                         style: TextStyle(
-                          fontSize: ratio.height * 20,
+                          fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white,
                         ),
