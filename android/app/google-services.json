@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "11560753109",
+    "project_id": "helpt-gachon",
+    "storage_bucket": "helpt-gachon.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11560753109:android:37821860fb8efd72becf5c",
+        "android_client_info": {
+          "package_name": "com.helpt.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "11560753109-qgtt9h7j9mga17ct9mbff4tj89b0g804.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZXSTzkqKkX-OuWLsIPgy5IW2jlBUZ3qc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "11560753109-qgtt9h7j9mga17ct9mbff4tj89b0g804.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "11560753109-f8q2iahhhli9dubqc3c5ikdprtc7gl18.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.helpt"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,7 @@
+firebase_functions~=0.1.0
+Flask==2.0.1
+opencv-python-headless
+mediapipe
+numpy
+flask-cors
+functions-framework
