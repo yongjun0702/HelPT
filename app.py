@@ -8,13 +8,22 @@ from model import PushUpCounter
 # Flask 애플리케이션 설정
 app = Flask(__name__)
 
-# CORS 활성화 (특정 도메인 또는 모든 도메인에서 요청 허용)
-CORS(app, resources={r"/process_frame": {"origins": "*"}})
+# CORS 활성화 (모든 도메인에서 요청 허용)
+CORS(app, resources={r"/*": {"origins": "*"}})
 
 # 모델 초기화
 pushup_counter = PushUpCounter()
 
-# 프레임을 처리하고 푸시업 카운트를 반환하는 API 엔드포인트
+# 푸쉬업 카운터 초기화 엔드포인트
+@app.route('/reset', methods=['POST'])
+def reset_counter():
+    try:
+        pushup_counter.reset()
+        return jsonify(success=True, message="Counter reset successfully"), 200
+    except Exception as e:
+        return jsonify(error=f"Failed to reset counter: {str(e)}"), 500
+
+# 프레임을 처리하고 푸쉬업 카운트를 반환하는 API 엔드포인트
 @app.route('/process_frame', methods=['POST'])
 def process_frame():
     try:
@@ -35,7 +44,7 @@ def process_frame():
         if frame is None:
             return jsonify(error="Invalid image data"), 400
 
-        # 푸시업 카운트 계산
+        # 푸쉬업 카운트 계산
         count = pushup_counter.count_pushups(frame)
 
         # 결과 반환
