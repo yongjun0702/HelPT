@@ -5,15 +5,31 @@ import time
 
 class PushUpCounter:
     def __init__(self):
+        self.reset()  # 초기화 메서드 호출
+        self.pose = None  # Pose 객체는 필요할 때 초기화
+
+    def reset(self):
+        """푸쉬업 카운터와 관련된 모든 상태 초기화"""
         self.count = 0
         self.direction = 0  # 0: 내려가기, 1: 올라가기
         self.down_threshold = 50  # 하강 기준 (픽셀 값)
         self.up_threshold = 20    # 상승 기준 (픽셀 값)
-        self.prev_shoulder_y = None  # 이전 어깨 위치 (초기화)
-        self.pose = mp.solutions.pose.Pose(static_image_mode=False, min_detection_confidence=0.5, min_tracking_confidence=0.5)
+        self.prev_shoulder_y = None  # 이전 어깨 위치 초기화
         self.last_timestamp = time.time()  # 마지막 타임스탬프
 
+    def initialize_pose(self):
+        """필요할 때 Pose 객체 초기화"""
+        if self.pose is None:
+            self.pose = mp.solutions.pose.Pose(
+                static_image_mode=False,
+                min_detection_confidence=0.5,
+                min_tracking_confidence=0.5
+            )
+
     def count_pushups(self, frame):
+        """푸쉬업 카운트를 계산"""
+        self.initialize_pose()  # 필요한 경우 Pose 초기화
+
         # 프레임 해상도
         frame_height, frame_width = frame.shape[:2]
 
@@ -40,7 +56,7 @@ class PushUpCounter:
             delta_y = shoulder_y - self.prev_shoulder_y
 
             # 노이즈 필터링 (변화량이 일정 기준 이상일 때만 동작 감지)
-            if abs(delta_y) > 5:
+            if abs(delta_y) > 10:  # 노이즈 필터링 개선
                 if delta_y > self.down_threshold and self.direction == 1:
                     self.direction = 0  # 내려감
                     self.count += 1
@@ -54,4 +70,6 @@ class PushUpCounter:
 
     def release(self):
         """Mediapipe 리소스 해제"""
-        self.pose.close()
+        if self.pose is not None:
+            self.pose.close()
+            self.pose = None  # 리소스 해제 후 None으로 설정
