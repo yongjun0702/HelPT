@@ -32,31 +32,40 @@ class _ExerciseResultWidgetState extends State<ExerciseResultWidget> {
                   color: HelPT.subBlue,
                 ),
               ),
-              DropdownButton<String>(
-                value: _sortOrder,
-                items: ['최신순', '오래된순'].map((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: HelPT.mainBlue,
-                      ),
-                    ),
+              // 드롭다운 버튼은 운동 기록이 있는 경우에만 표시
+              StreamBuilder<QuerySnapshot>(
+                stream: _getExerciseRecordsStream(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                    return SizedBox.shrink(); // 빈 공간으로 대체
+                  }
+                  return DropdownButton<String>(
+                    value: _sortOrder,
+                    items: ['최신순', '오래된순'].map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(
+                          value,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: HelPT.mainBlue,
+                          ),
+                        ),
+                      );
+                    }).toList(),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        _sortOrder = newValue!;
+                      });
+                    },
                   );
-                }).toList(),
-                onChanged: (String? newValue) {
-                  setState(() {
-                    _sortOrder = newValue!;
-                  });
                 },
               ),
             ],
           ),
         ),
         // 운동 기록 리스트
-        Expanded(
+        Container(
           child: StreamBuilder<QuerySnapshot>(
             stream: _getExerciseRecordsStream(),
             builder: (context, snapshot) {
@@ -70,7 +79,10 @@ class _ExerciseResultWidgetState extends State<ExerciseResultWidget> {
                 return Center(
                   child: Text(
                     '운동 기록이 없습니다.',
-                    style: TextStyle(color: HelPT.grey3, fontSize: 16),
+                    style: TextStyle(
+                      color: HelPT.lightgrey3,
+                      fontSize: 16,
+                    ),
                   ),
                 );
               }
@@ -88,6 +100,8 @@ class _ExerciseResultWidgetState extends State<ExerciseResultWidget> {
               });
 
               return ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: records.length,
                 itemBuilder: (context, index) {
                   final record = records[index].data() as Map<String, dynamic>;
@@ -155,7 +169,6 @@ class _ExerciseResultWidgetState extends State<ExerciseResultWidget> {
       ],
     );
   }
-
   // Firestore에서 운동 기록을 가져오는 스트림
   Stream<QuerySnapshot> _getExerciseRecordsStream() {
     final currentUser = FirebaseAuth.instance.currentUser;

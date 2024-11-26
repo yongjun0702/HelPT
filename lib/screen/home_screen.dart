@@ -150,10 +150,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(height: 80),
-              SizedBox(
-                height: 800,
-                child: ExerciseResultWidget(),
-              ),
+              ExerciseResultWidget(),
+              SizedBox(height: 40),
             ],
           ),
         ),

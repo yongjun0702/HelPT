@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'package:helpt/config/color.dart';
+import 'package:helpt/screen/home_screen.dart';
 import 'package:helpt/service/api_service.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -55,12 +56,14 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
       _cameraController = CameraController(camera, ResolutionPreset.medium);
       await _cameraController!.initialize();
 
+      // 서버에 초기화 요청
+      await ApiService().resetCounter();
+
       setState(() {
         _startTime = DateTime.now();
         _isRunning = true;
       });
 
-      // 프레임을 주기적으로 서버로 전송
       _timer = Timer.periodic(Duration(milliseconds: 500), (timer) async {
         if (_cameraController?.value.isInitialized == true) {
           final image = await _cameraController!.takePicture();
@@ -74,7 +77,6 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
       });
     }
   }
-
   Future<void> _sendFrame(XFile image) async {
     try {
       final count = await ApiService().sendFrame(image);
@@ -111,6 +113,11 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
       });
 
       print('Exercise session saved to Firebase.');
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+            builder: (context) => HomeScreen()),
+            (route) => false,
+      );
     } catch (e) {
       print('Error saving to Firebase: $e');
     }
@@ -131,11 +138,13 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: HelPT.background,
       appBar: AppBar(
         title: Text("운동 측정", style: TextStyle(fontWeight: FontWeight.bold)),
         backgroundColor: HelPT.background,
         scrolledUnderElevation: 0,
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: FutureBuilder<void>(
         future: _initializeControllerFuture,
@@ -144,17 +153,31 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
             return Center(child: Text(_errorMessage!));
           } else if (snapshot.connectionState == ConnectionState.done &&
               _cameraController?.value.isInitialized == true) {
-            return Stack(
-              alignment: Alignment.bottomCenter,
-              children: [
-                CameraPreview(_cameraController!),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(width: 1.5, color: HelPT.mainBlue),
+                        color: HelPT.tapBackgroud,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                          bottomLeft: Radius.circular(20),
+
+                        ),
+                        child: CameraPreview(_cameraController!),
+                      )),
+                  Column(
                     children: [
                       Text(
-                        'Push-Up Count: $_pushupCount',
+                        '푸쉬업 횟수: $_pushupCount',
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
@@ -162,17 +185,43 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
                         ),
                       ),
                       SizedBox(height: 16),
-                      ElevatedButton(
-                        onPressed: _isRunning ? _stopExercise : null,
-                        child: Text("운동 종료"),
+                      GestureDetector(
+                        onTap: () async {
+                          _isRunning ? _stopExercise : null;
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: _isRunning
+                                ? HelPT.mainBlue
+                                : HelPT.grey1,
+                          ),
+                          child: Padding(
+                            padding:
+                            const EdgeInsets.symmetric(
+                                vertical: 17, horizontal: 20),
+                            child: Center(
+                              child: Text(
+                                "운동 종료",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           } else {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+                child: CircularProgressIndicator(color: HelPT.mainBlue,));
           }
         },
       ),
