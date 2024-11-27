@@ -29,7 +29,7 @@ class _ExerciseResultWidgetState extends State<ExerciseResultWidget> {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: HelPT.subBlue,
+                  color: HelPT.lightgrey4,
                 ),
               ),
               // 드롭다운 버튼은 운동 기록이 있는 경우에만 표시
@@ -118,10 +118,6 @@ class _ExerciseResultWidgetState extends State<ExerciseResultWidget> {
                     decoration: BoxDecoration(
                       color: HelPT.tapBackgroud,
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(
-                        color: HelPT.mainBlue,
-                        width: 1.5,
-                      ),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

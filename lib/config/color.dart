@@ -17,7 +17,8 @@ class HelPT{
 
   static const mainBlue = Color(0xFF70A0FF);
   static const subBlue = Color(0xFFBDD6FF);
-  static const background = Color(0xFF25252A);
+  static const background = Color(0xFF222227);
+  static const background2 = Color(0xFF25252A);
   static const tapBackgroud = Color(0xFF323239);
   static const borderColor = Color(0xFFCAC4D0);
 }

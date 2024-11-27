@@ -61,7 +61,6 @@ class SettingScreen extends StatelessWidget {
                 width: double.infinity,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(width: 2, color: HelPT.mainBlue),
                   color: HelPT.tapBackgroud,
                 ),
                 child: Padding(
@@ -122,7 +121,6 @@ class SettingScreen extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(width: 2, color: HelPT.mainBlue),
                     color: HelPT.tapBackgroud,
                   ),
                   child: Padding(
@@ -171,7 +169,6 @@ class SettingScreen extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(width: 2, color: HelPT.mainBlue),
                     color: HelPT.tapBackgroud,
                   ),
                   child: Padding(

@@ -78,11 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 70),
+              SizedBox(height: 40),
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
-                  border: Border.all(width: 1.5, color: HelPT.mainBlue),
                   color: HelPT.tapBackgroud,
                 ),
                 child: Padding(
@@ -91,15 +90,17 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Icon(Icons.directions_run, color: HelPT.mainBlue, size: 90),
+                      Container(
+                          width: 80,
+                          height: 80,
+                          child: Image.asset("assets/img/logo.png")),
+                      SizedBox(width: 10),
                       Flexible(
                         child: Text.rich(TextSpan(children: [
                           TextSpan(
                             text: '$displayName님',
                             style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                                color: HelPT.lightgrey3),
+                                fontSize: 17, color: HelPT.lightgrey3),
                           ),
                           TextSpan(
                               text: '\n측정을 시작해볼까요?',
@@ -126,30 +127,37 @@ class _HomeScreenState extends State<HomeScreen> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(20),
-                    border: Border.all(width: 1.5, color: HelPT.mainBlue),
+                    // border: Border.all(width: 1.5, color: HelPT.mainBlue),
                     color: HelPT.tapBackgroud,
                   ),
                   child: Padding(
-                    padding:
-                        const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 20, horizontal: 20),
                     child: Row(
                       children: [
+                        Icon(
+                          Icons.filter_center_focus,
+                          color: HelPT.lightgrey4,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
                         Text(
                           "측정 하기",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: HelPT.mainBlue,
+                            color: HelPT.lightgrey4,
                           ),
                         ),
                         Spacer(),
-                        Icon(Icons.arrow_forward, color: HelPT.mainBlue),
+                        Icon(Icons.arrow_forward, color: HelPT.lightgrey4),
                       ],
                     ),
                   ),
                 ),
               ),
-              SizedBox(height: 80),
+              SizedBox(height: 50),
               ExerciseResultWidget(),
               SizedBox(height: 40),
             ],

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:helpt/config/color.dart';
 import 'package:helpt/screen/home_screen.dart';
 import 'package:helpt/service/api_service.dart';
+import 'package:helpt/widget/tab_widget.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -115,7 +116,7 @@ class _ExerciseScreenState extends State<ExerciseScreen> {
       print('Exercise session saved to Firebase.');
       Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(
-            builder: (context) => HomeScreen()),
+            builder: (context) => RootTab()),
             (route) => false,
       );
     } catch (e) {
