@@ -1,4 +1,5 @@
 # **HelPT - My Personal Health Trainer**
+A push-up measurement application using Mediapipe
 
 https://helpt-gachon.web.app/
 
