@@ -1,16 +1,24 @@
-# helpt
+# **HelPT - My Personal Health Trainer**
 
-간편한 헬스 트레이너 - HelPT
+Use Mediapipe to track the user's upper body pose, and the Flask server analyzes the pose to calculate the number of push-ups, reflecting real-time in the application through communication between the Flutter and Flask servers
 
-## Getting Started
+# Used Package :
+  firebase_auth: ^5.3.1
+  google_sign_in: ^6.2.2
+  provider: ^6.1.2
+  timezone: ^0.9.4
+  shared_preferences: ^2.3.2
+  cloud_firestore: ^5.4.4
+  url_launcher: ^6.3.0
+  permission_handler: ^11.3.1
+  http: ^1.2.2
+  camera: ^0.11.0+2
 
-This project is a starting point for a Flutter application.
+# How to Install the app
 
-A few resources to get you started if this is your first Flutter project:
+## Android
+1. clone the corresponding repository to the local computer	
+2. Open a repo in Android Studio
+3. Flutter SDK set up
+4. Run Android Emulator
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
