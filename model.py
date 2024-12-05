@@ -12,10 +12,8 @@ class PushUpCounter:
         """푸쉬업 카운터와 관련된 모든 상태 초기화"""
         self.count = 0
         self.direction = 0  # 0: 내려가기, 1: 올라가기
-        self.down_threshold = 50  # 하강 기준 (픽셀 값)
-        self.up_threshold = 20    # 상승 기준 (픽셀 값)
-        self.prev_shoulder_y = None  # 이전 어깨 위치 초기화
-        self.last_timestamp = time.time()  # 마지막 타임스탬프
+        self.down_threshold = 80  # 하강 기준 (각도)
+        self.up_threshold = 160   # 상승 기준 (각도)
 
     def initialize_pose(self):
         """필요할 때 Pose 객체 초기화"""
@@ -40,31 +38,34 @@ class PushUpCounter:
         if results.pose_landmarks:
             landmarks = results.pose_landmarks.landmark
 
-            # 왼쪽, 오른쪽 어깨의 y 좌표 계산
-            left_shoulder_y = landmarks[mp.solutions.pose.PoseLandmark.LEFT_SHOULDER.value].y * frame_height
-            right_shoulder_y = landmarks[mp.solutions.pose.PoseLandmark.RIGHT_SHOULDER.value].y * frame_height
+            # 왼쪽 팔의 어깨, 팔꿈치, 손목 좌표
+            shoulder = [
+                landmarks[mp.solutions.pose.PoseLandmark.LEFT_SHOULDER.value].x * frame_width,
+                landmarks[mp.solutions.pose.PoseLandmark.LEFT_SHOULDER.value].y * frame_height,
+            ]
+            elbow = [
+                landmarks[mp.solutions.pose.PoseLandmark.LEFT_ELBOW.value].x * frame_width,
+                landmarks[mp.solutions.pose.PoseLandmark.LEFT_ELBOW.value].y * frame_height,
+            ]
+            wrist = [
+                landmarks[mp.solutions.pose.PoseLandmark.LEFT_WRIST.value].x * frame_width,
+                landmarks[mp.solutions.pose.PoseLandmark.LEFT_WRIST.value].y * frame_height,
+            ]
 
-            # 평균 어깨 y 좌표 계산
-            shoulder_y = (left_shoulder_y + right_shoulder_y) / 2
-
-            # 초기 이전 어깨 위치 설정
-            if self.prev_shoulder_y is None:
-                self.prev_shoulder_y = shoulder_y
-                return self.count  # 초기화 상태에서 카운트는 변경하지 않음
-
-            # 어깨 y축 변화량 계산
-            delta_y = shoulder_y - self.prev_shoulder_y
-
-            # 노이즈 필터링 (변화량이 일정 기준 이상일 때만 동작 감지)
-            if abs(delta_y) > 10:  # 노이즈 필터링 개선
-                if delta_y > self.down_threshold and self.direction == 1:
-                    self.direction = 0  # 내려감
-                    self.count += 1
-                elif delta_y < -self.up_threshold and self.direction == 0:
-                    self.direction = 1  # 올라감
-
-                # 이전 어깨 위치 업데이트
-                self.prev_shoulder_y = shoulder_y
+            a = np.array(shoulder)
+            b = np.array(elbow)
+            c = np.array(wrist)
+            radians = np.arctan2(c[1] - b[1], c[0] - b[0]) - np.arctan2(a[1] - b[1], a[0] - b[0])
+            angle = np.abs(radians * 180.0 / np.pi)
+            if angle > 180.0:
+                angle = 360 - angle
+        
+            # 각도 변화에 따른 동작 감지
+            if angle > self.up_threshold and self.direction == 1:
+                self.direction = 0  # 내려감 상태로 전환
+                self.count += 1     # 푸쉬업 성공 카운트
+            elif angle < self.down_threshold and self.direction == 0:
+                self.direction = 1  # 올라감 상태로 전환
 
         return self.count
 
@@ -73,3 +74,5 @@ class PushUpCounter:
         if self.pose is not None:
             self.pose.close()
             self.pose = None  # 리소스 해제 후 None으로 설정
+
+
