@@ -12,13 +12,13 @@ Use Mediapipe to track the user's upper body pose, and the Flask server analyzes
 
 
 # Used Package :
-  firebase_auth: ^5.3.1<br/>  
+  firebase_auth: ^5.3.1<br/>
   google_sign_in: ^6.2.2<br/>
   provider: ^6.1.2<br/>
   timezone: ^0.9.4<br/>
   shared_preferences: ^2.3.2<br/>
   cloud_firestore: ^5.4.4<br/>
-  url_launcher: ^6.3.0<br/n>
+  url_launcher: ^6.3.0<br/>
   permission_handler: ^11.3.1<br/>
   http: ^1.2.2<br/>
   camera: ^0.11.0+2
