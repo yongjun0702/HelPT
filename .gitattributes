@@ -1,0 +1,5 @@
+/* .gitattributes */
+
+* linguist-vendored
+*.dart linguist-vendored=false
+*.python linguist-vendored=false
