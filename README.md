@@ -20,7 +20,9 @@ Use Mediapipe to track the user's upper body pose, and the Flask server analyzes
   url_launcher: ^6.3.0<br/>
   permission_handler: ^11.3.1<br/>
   http: ^1.2.2<br/>
-  camera: ^0.11.0+2
+  camera: ^0.11.0+2<br/>
+  opencv ^4.10.0<br/>
+  numpy ^2.1.0
 
 # How to Install the app
 
