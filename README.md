@@ -22,7 +22,8 @@ Use Mediapipe to track the user's upper body pose, and the Flask server analyzes
   http: ^1.2.2<br/>
   camera: ^0.11.0+2<br/>
   opencv ^4.10.0<br/>
-  numpy ^2.1.0
+  numpy ^2.1.0</br>
+  mediapipe ^0.10.18
 
 # How to Install the app
 
